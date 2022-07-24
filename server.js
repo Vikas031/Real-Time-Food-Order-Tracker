@@ -8,14 +8,20 @@ const PORT=process.env.PORT||3000;
 
 
 
+//setting asset
+app.use(express.static('public'))
+
+
+
 app.get('/',(req,res)=>{
     res.render('home');
 })
 
-//setting template engine
+//setting template engine 
 app.use(expressLayout);
 app.set('views',path.join(__dirname,'/resources/views'));
 app.set('view engine', 'ejs');
+
 
 app.listen(PORT,()=>{
  console.log("Listening on port 3000");

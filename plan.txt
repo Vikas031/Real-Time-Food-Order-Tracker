@@ -7,3 +7,4 @@
         -nodemon
 [+] Create Express server 
 [+] Git setup and first commit
+[.] Install Laravel Mix
