@@ -77,6 +77,10 @@ app.set('view engine', 'ejs');
 
 require('./routes/web')(app);
 
+app.use((req,res)=>{
+  res.status(404).render('errors/404')
+})
+
 const server=app.listen(PORT,()=>{
       console.log("Listening on port 3000");
 
@@ -95,5 +99,6 @@ eventEmitter.on('orderUpdated',(data)=>{
 })
 
 eventEmitter.on('orderPlaced',(data)=>{
+
   io.to('adminRoom').emit('orderPlaced',data);
 })
