@@ -15,7 +15,7 @@ const Emitter=require('events');
 const PORT=process.env.PORT||3000;
 
 //database connection
-const url='mongodb://localhost:27017/Pizza';
+const url='mongodb+srv://vikas:Wict7vzUimysl4n3@cluster0.yvxxnhv.mongodb.net/Pizza?retryWrites=true&w=majority';
 mongoose.connect(url,
   {
     useNewUrlParser: true,

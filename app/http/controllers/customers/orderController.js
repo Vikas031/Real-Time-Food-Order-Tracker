@@ -3,7 +3,6 @@ const moment=require('moment');
 function orderController(){
     return {
         store(req,res){
-            console.log(req.body);
             const {phone,address}=req.body;
             if(phone==''||address==''){
                 req.flash('error','All fields are required');
