@@ -9,6 +9,7 @@ const flash=require('express-flash')
 const MongoDbStore=require('connect-mongo')(session);//to connect session to mongo 
 const passport=require('passport')
 require("dotenv").config();
+const Emitter=require('events');
 
 
 const PORT=process.env.PORT||3000;
@@ -37,6 +38,9 @@ let mongoStore=new MongoDbStore({
     collection:'sessions'
 })
 
+//event emitter 
+const eventEmitter=new Emitter();
+app.set('eventEmitter',eventEmitter);
 
 //session config
 app.use(session({
@@ -63,7 +67,6 @@ app.use(express.json());
 app.use((req,res,next)=>{
   res.locals.session=req.session;
   res.locals.user=req.user;
-  console.log(req.user);
   next()
 })
 
@@ -74,7 +77,23 @@ app.set('view engine', 'ejs');
 
 require('./routes/web')(app);
 
-app.listen(PORT,()=>{
- console.log("Listening on port 3000");
+const server=app.listen(PORT,()=>{
+      console.log("Listening on port 3000");
 
+      })
+
+const io=require('socket.io')(server);
+io.on('connection',(socket)=>{
+      //make private room on the basis of order_id
+      socket.on('join',(orderId)=>{
+          socket.join(orderId) 
+      })
+})
+
+eventEmitter.on('orderUpdated',(data)=>{
+  io.to(`order_${data.id}`).emit('orderUpdated',data);
+})
+
+eventEmitter.on('orderPlaced',(data)=>{
+  io.to('adminRoom').emit('orderPlaced',data);
 })
