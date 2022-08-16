@@ -2,7 +2,7 @@
   "name": "pizza-tracker",
   "version": "1.0.0",
   "description": "Real time pizza tracker",
-  "main": "index.js",
+  "main": "server.js",
   "author": "Vikas Bhandari",
   "license": "MIT",
   "scripts": {
