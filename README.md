@@ -1,6 +1,6 @@
 # TechHut : A Realtime Voice Meet Platform
 
-## Website Url : [Link](https://tourmaline-dusk-542b1c.netlify.app/)
+## Website Url : [Link](https://realtime-foodorder-track.herokuapp.com/)
 
 ## Tech
 Tech-Hut uses a number of open source projects :
